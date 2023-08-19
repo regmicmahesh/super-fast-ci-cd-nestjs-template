@@ -1,5 +1,7 @@
 FROM base-prod as build
 
+COPY . .
+
 RUN yarn build
 
 ENV NODE_ENV=production
