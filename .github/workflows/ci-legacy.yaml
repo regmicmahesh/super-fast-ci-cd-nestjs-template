@@ -3,7 +3,7 @@ name: build-and-push
 on:
   push:
     branches:
-      - mainx
+      - main
 
 env:
   AWS_REGION: us-west-2
