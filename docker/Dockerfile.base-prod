@@ -1,0 +1,7 @@
+FROM base-prod as build
+
+WORKDIR /app
+
+COPY --chown=node:node package*.json yarn.lock ./
+
+RUN yarn install --frozen-lockfile
