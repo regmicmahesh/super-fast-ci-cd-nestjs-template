@@ -34,7 +34,7 @@ jobs:
              - yarn.lock
 
       - name: Build Base Image
-        if: steps.changed-files.outputs.test_any_changed == 'true'
+        if: steps.changed-files.outputs.dependencies_any_changed == 'true'
         run: make docker/push-base
 
       - name: Push Image to Production
