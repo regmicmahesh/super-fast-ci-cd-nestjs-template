@@ -1,0 +1,30 @@
+name: build-and-push
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AWS_REGION: us-west-2
+  IMAGE_NAME: regmicmahesh/nestjs-cicd-template:${{ github.ref_name }}-${{ github.sha }}
+  LEGACY_IMAGE_NAME: regmicmahesh/nestjs-cicd-template:${{ github.ref_name }}-${{ github.sha }}-legacy
+  BASE_IMAGE_NAME: regmicmahesh/node-18-bookworm:${{ github.ref_name }}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        run: make docker/login
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Push Image to Production
+        run: |
+          make docker/push-legacy

@@ -32,11 +32,16 @@ docker/push: ## Push image to ECR
 	@docker push $(IMAGE_NAME)
 
 
+docker/push-legacy:
+	@docker build . -t $(LEGACY_IMAGE_NAME) -f $(APP_ROOT)/docker/Dockerfile.prod-legacy
+	@docker push $(LEGACY_IMAGE_NAME)
+
 docker/push-base:
 	@docker pull $(BASE_IMAGE_NAME)
 	@docker tag $(BASE_IMAGE_NAME) base-prod:latest
 	@docker build . -t $(BASE_IMAGE_NAME) -f $(APP_ROOT)/docker/Dockerfile.base-prod
 	@docker push $(BASE_IMAGE_NAME)
+
 
 help:
 	@echo -e "\n Usage: make [target]\n"
