@@ -23,7 +23,7 @@ jobs:
         with:
           registry: ghcr.io
           username: "regmicmahesh"
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Check if package and lock files have changed.
         id: changed-files
