@@ -33,6 +33,8 @@ docker/push: ## Push image to ECR
 
 
 docker/push-base:
+	@docker pull $(BASE_IMAGE_NAME)
+	@docker tag $(BASE_IMAGE_NAME) base-prod:latest
 	@docker build . -t $(BASE_IMAGE_NAME) -f $(APP_ROOT)/docker/Dockerfile.base-prod
 	@docker push $(BASE_IMAGE_NAME)
 
